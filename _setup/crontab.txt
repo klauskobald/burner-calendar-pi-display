@@ -1,0 +1,5 @@
+# do not change
+# this is automatically set up by audioswarm/server/setup.sh
+
+1 * * * * timedatectl --adjust-system-clock
+* * * * * /bin/bash /home/pi/Documents/burner_calendar/keepawake.sh > /dev/null

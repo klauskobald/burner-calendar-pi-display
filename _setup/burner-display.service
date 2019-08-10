@@ -1,0 +1,18 @@
+[Unit]
+Description=Burner Display
+After=multi-user.target
+
+[Service]
+Type=simple
+User=1000
+PermissionsStartOnly=true
+ExecStart=/home/pi/Documents/burner_calendar/./start_browser.sh
+
+#WatchdogSec=30
+Restart=always
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target
+
+

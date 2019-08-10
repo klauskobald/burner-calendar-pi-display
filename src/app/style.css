@@ -1,0 +1,82 @@
+
+
+body{
+    background-color: black;
+    color: white;
+    font-family: Geneva;
+}
+
+.statusinfo{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.7em;
+    color: grey;
+    opacity: 0.7;
+}
+
+.calendar.agenda{
+    background-color: black;
+    clear: both;
+}
+
+.agenda .day{
+    float: left;
+}
+
+.agenda .day .head{
+    font-size: 2em;
+    padding: 5px;
+}
+
+.agenda .day .events .item{
+    position: relative;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.agenda .day .events .item .starttime{
+    font-size: 1.2em;
+    padding:4px;
+    padding-left: 10px;
+}
+
+.agenda .day .events .item .starttime > span{
+    border-radius: 4px;
+    background-color: rgba(255,255,255,0.2);
+    padding:3px ;
+    padding-left: 10px;
+    padding-right: 10px;
+    width:140px;
+    display: block;
+    opacity: 0.7;
+}
+
+.agenda .day .events .item .summary{
+    font-size: 1.2em;
+    padding:4px;
+    padding-left: 14px;
+}
+
+.agenda .day .events .item .location{
+    font-size: 0.9em;
+    opacity: 0.4;
+    position: absolute;
+    right:15px;
+    top:15px;
+    padding: 0px;
+
+}
+
+.clock{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    border-radius: 8px;
+    background-color: #333333;
+    padding: 10px;
+    font-size: 3em;
+    opacity: 0.7;
+    font-family: Courier;
+}
+

@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+/node_modules
+/src/config.js
+/server/data/credentials.json
+/server/data/token.json

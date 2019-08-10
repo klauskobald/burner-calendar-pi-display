@@ -1,0 +1,34 @@
+{
+  "name": "burner-calendar",
+  "version": "1.0.0",
+  "description": "first install: curl -sS get.pimoroni.com/skywriter | bash",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "startVAGRANT": "webpack-dev-server --host 0.0.0.0 --public 172.17.7.2:8082 --watch-poll",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 8088 --watch-poll",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.3",
+    "css-loader": "^3.1.0",
+    "dom-loader": "^1.0.4",
+    "file-loader": "^4.1.0",
+    "fs": "0.0.1-security",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "js-yaml-loader": "^1.2.2",
+    "style-loader": "^0.23.1",
+    "uws": "^100.0.1",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-node-externals": "^1.7.2",
+    "ws": "^7.1.1"
+  },
+  "dependencies": {}
+}
