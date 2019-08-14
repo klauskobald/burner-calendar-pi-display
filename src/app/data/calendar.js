@@ -22,7 +22,7 @@ export default class DataCalendar {
         StatusInfo.Display("loading ...");
         for (var k in Config.Calendars) {
             console.log("load", k);
-            ApiRequest.Get('events/' + k + '/' + maxEvents).then((events) => {
+            ApiRequest.Get('events/' + k + '/' + maxEvents + '/?' + new Date().getTime()).then((events) => {
                 this.OnData(JSON.parse(events));
             });
         }

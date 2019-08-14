@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "startVAGRANT": "webpack-dev-server --host 0.0.0.0 --public 172.17.7.2:8082 --watch-poll",
-    "start": "webpack-dev-server --host 0.0.0.0 --port 8088 --watch-poll",
+    "start": "webpack-dev-server --host 0.0.0.0 --port 8188 --watch-poll",
     "build": "webpack"
   },
   "author": "",

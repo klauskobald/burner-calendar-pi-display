@@ -11,3 +11,7 @@ Make sure to run node server/get-authorization.js once to get a token. This data
 
 Unfortunately I had no time to get the google api code to work in the browser. So there is a little gateway server in the server folder.
 
+UPDATE:
+
+I decided for a php proxy running on our server. That takes care of all authentication shenannigans.
+

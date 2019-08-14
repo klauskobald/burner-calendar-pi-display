@@ -3,3 +3,7 @@
 /src/config.js
 /server/data/credentials.json
 /server/data/token.json
+/vendor
+/dist
+.idea
+start_browser.sh

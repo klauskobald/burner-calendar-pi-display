@@ -14,7 +14,9 @@ crontab _setup/crontab.txt
 
 chmod +x start_browser.sh
 sudo systemctl daemon-reload
-sudo systemctl enable burner-gateway
 sudo systemctl enable burner-display
-sudo systemctl restart burner-gateway
 sudo systemctl restart burner-display
+
+# only needed if local node server is used as proxy:
+#sudo systemctl enable burner-gateway
+#sudo systemctl restart burner-gateway

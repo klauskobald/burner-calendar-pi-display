@@ -10,7 +10,7 @@ import Config from "./config";
 import Main from "./app/component/main";
 
 window._config=Config;
-ApiRequest.Initialize('http://localhost:7000/');
+ApiRequest.Initialize(Config.ProxyPath);
 const main=new Main();
 window._main=main;
 
