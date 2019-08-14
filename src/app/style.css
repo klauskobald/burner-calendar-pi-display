@@ -18,8 +18,11 @@ body{
 }
 
 .calendar.agenda{
+    position: absolute;
     background-color: black;
     clear: both;
+    height: 100%;
+    overflow: auto;
 }
 
 .agenda .day{
