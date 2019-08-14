@@ -8,6 +8,7 @@ import Config from "../../config";
 import DataCalendar from "../data/calendar";
 import DomAccess from "../domAccess";
 import Tools from "../tools";
+import EventDetails from "./eventdetails";
 
 export default class CalendarAgenda extends ComponentBase {
 
@@ -42,7 +43,9 @@ export default class CalendarAgenda extends ComponentBase {
         var currDay = null;
         events.forEach(e => {
             var i = this.itemEle.cloneNode(true);
-
+            i.onclick=()=>{
+                this.onEventClick(e);
+            };
             var cId = e.organizer.email;
             i.style.backgroundColor = Config.Calendars[cId].color;
 
@@ -70,6 +73,13 @@ export default class CalendarAgenda extends ComponentBase {
                 endtime)+ "</span>";
             currDay.appendChild(i);
         });
+    }
+
+    onEventClick(e){
+        if(this.details)
+            this.details.RemoveMeFromParent();
+        this.details=new EventDetails(e);
+        this.details.RenderInto(document.body);
     }
 
     _RenderInto(parent) {

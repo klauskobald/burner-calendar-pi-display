@@ -16,3 +16,7 @@ window._main=main;
 
 main.RenderInto(document.body);
 
+// cleanup
+setTimeout(()=>{
+    document.location.reload();
+},3600000 * 8);

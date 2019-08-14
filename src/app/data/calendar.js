@@ -23,12 +23,18 @@ export default class DataCalendar {
         for (var k in Config.Calendars) {
             console.log("load", k);
             ApiRequest.Get('events/' + k + '/' + maxEvents + '/?' + new Date().getTime()).then((events) => {
-                this.OnData(JSON.parse(events));
+                try {
+                    this.OnData(JSON.parse(events));
+                } catch (e) {
+                    StatusInfo.Display('loading error');
+                    clearTimeout(this._timer);
+                }
             });
         }
     }
 
     OnData(events) {
+        var t = new Date().getTime();
         events.forEach((e) => {
             var old = this.events[e.id];
             if (old) {
@@ -37,12 +43,21 @@ export default class DataCalendar {
             }
             else
                 this.events[e.id] = e;
+
+            this.events[e.id]._touched = t;
         });
 
         // aggregate all events first then send
         clearTimeout(this._timer);
         this._timer = setTimeout(() => {
             StatusInfo.Display("updated");
+            var timedout=new Date().getTime()-10000;
+
+            for(var k in this.events){
+                var e=this.events[k];
+                if(e._touched<timedout)
+                    delete this.events[e.id];
+            }
             this.dataFn(this.EventsToOrderedList());
         }, 500);
 

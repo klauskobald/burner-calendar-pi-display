@@ -34,7 +34,8 @@ export default class ComponentBase {
 
 
     RemoveMeFromParent() {
-        this.tpl.dom.parentNode.removeChild(this.tpl.dom);
+        if(this.tpl.dom.parentNode)
+            this.tpl.dom.parentNode.removeChild(this.tpl.dom);
     }
 
     // override those
