@@ -12,6 +12,11 @@ import EventDetails from "./eventdetails";
 
 export default class CalendarAgenda extends ComponentBase {
 
+    constructor(startTime){
+        super();
+        this.startTime=startTime;
+    }
+
     TemplateHasBeenLoaded(tpl) {
         var da = new DomAccess(tpl.dom);
         this.itemEle = da.FirstByClass('item');
@@ -19,11 +24,12 @@ export default class CalendarAgenda extends ComponentBase {
         this.container = da.FirstByClass("agenda");
         this.dayEle = da.FirstByClass('day');
         this.dayEle.parentNode.removeChild(this.dayEle);
+
     }
 
     HasBeenActivated() {
         this.datasource = new DataCalendar(x => this.OnData(x));
-        this.AccuireData();
+        this.datasource.SetStartTime(this.startTime);
         clearInterval(this.timer);
         this.timer = setInterval(() => {
             this.AccuireData();
@@ -34,30 +40,39 @@ export default class CalendarAgenda extends ComponentBase {
         this.datasource.LoadCalendars();
     }
 
+
+
     OnData(events) {
         console.log(events);
         var maxDays = Config.DaysColumns, dayIdx = 0;
-        var width = parseInt(100 / maxDays) + "%";
+        // var width = parseInt(100 / maxDays) + "%";
+        var colClass = 'col-' + maxDays;
         this.container.innerHTML = "";
         var dayOfWeek = null;
         var currDay = null;
+        var iconpath = Config.IconPath;
+        var now=new Date();
         events.forEach(e => {
             var i = this.itemEle.cloneNode(true);
-            i.onclick=()=>{
+            i.onclick = () => {
                 this.onEventClick(e);
             };
             var cId = e.organizer.email;
             i.style.backgroundColor = Config.Calendars[cId].color;
 
             var starttime = e['start']['dateTime'];
-            var endtime= e['end']['dateTime'];
+            var endtime = e['end']['dateTime'];
+
+            if(new Date(starttime)<=now && now<=new Date(endtime))
+                i.classList.add('happening-now');
+
             var dow = Tools.DateTimeRelativeDaysString(starttime);
             if (dow !== dayOfWeek) {
                 if (dayIdx === maxDays)
                     return;
                 dayOfWeek = dow;
                 var _currDay = this.dayEle.cloneNode(true);
-                _currDay.style.width = width;
+                _currDay.classList.add(colClass);
                 var _da = new DomAccess(_currDay);
                 (_da.FirstByClass("head")).innerText = dayOfWeek;
                 this.container.appendChild(_currDay);
@@ -66,19 +81,32 @@ export default class CalendarAgenda extends ComponentBase {
             }
 
             var da = new DomAccess(i);
-            da.FirstByClass('summary').innerHTML = "<span>" + e['summary'] + "</span>";
+            var s = e['summary'].split(':');
+            var summary, iconname;
+            if (s.length === 1) {
+                summary = s[0];
+                iconname = null;
+            }
+            else {
+                iconname = iconpath + s[0].trim().toLowerCase() + '.svg';
+                summary = s[1];
+            }
+            da.FirstByClass('summary').innerHTML = "<span>" + summary + "</span>";
             da.FirstByClass('location').innerHTML = "<span>" + Config.Calendars[cId].location + "</span>";
             da.FirstByClass('starttime').innerHTML = "<span>" + Tools.DateTimeFormatForToday(
-                starttime) + " - "+Tools.DateTimeFormatForToday(
-                endtime)+ "</span>";
+                starttime) + " - " + Tools.DateTimeFormatForToday(
+                endtime) + "</span>";
+            var iconele = da.FirstByClass('icon');
+            iconele.src = iconname;
+            iconele.style.visibility = iconname ? 'visible' : 'hidden';
             currDay.appendChild(i);
         });
     }
 
-    onEventClick(e){
-        if(this.details)
+    onEventClick(e) {
+        if (this.details)
             this.details.RemoveMeFromParent();
-        this.details=new EventDetails(e);
+        this.details = new EventDetails(e);
         this.details.RenderInto(document.body);
     }
 

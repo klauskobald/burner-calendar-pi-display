@@ -11,13 +11,19 @@ $cmd = $argv[1];
 $calendarId = $argv[2];
 $max = $argv[3];
 
+if($argv[4]){
+	$startTime = strtotime($argv[4]);
+	if(!$startTime) $startTime=$argv[4]; # is timestamp
+}
+else $startTime =  time();
+
 $client = getClient();
 $service = new Google_Service_Calendar($client);
 $optParams = array(
 	'maxResults'   => $max,
 	'orderBy'      => 'startTime',
 	'singleEvents' => true,
-	'timeMin'      => date('c'),
+	'timeMin'      => date('c', $startTime),
 );
 $results = $service->events->listEvents($calendarId, $optParams);
 $events = $results->getItems();
@@ -45,8 +51,8 @@ function exportGrouped($events) {
 }
 
 
-function formatDate($str){
-	return date('Y-m-d H:i',strtotime($str));
+function formatDate($str) {
+	return date('Y-m-d H:i', strtotime($str));
 }
 
 switch ($cmd) {
@@ -68,20 +74,20 @@ switch ($cmd) {
 		break;
 	case 'export-grouped-by-time-table':
 		$lst = exportGrouped($events);
-		$head=array();
-		$r=array();
-		foreach($lst as $e){
-			if(!$head) {
+		$head = array();
+		$r = array();
+		foreach ($lst as $e) {
+			if (!$head) {
 				$head = array_keys($e);
-				$r[]=$head;
+				$r[] = $head;
 			}
-			$ts=array();
-			foreach($e['times'] as $t){
-				$ts[]=formatDate($t['start']).' ('.((strtotime($t['end'])-strtotime($t['start']))/60)."')";
+			$ts = array();
+			foreach ($e['times'] as $t) {
+				$ts[] = formatDate($t['start']) . ' (' . ((strtotime($t['end']) - strtotime($t['start'])) / 60) . "')";
 			}
-			$e['times']=join(", ",$ts);
-			$lin=array_values($e);
-			$r[]=$lin;
+			$e['times'] = join(", ", $ts);
+			$lin = array_values($e);
+			$r[] = $lin;
 		}
 		echo json_encode($r);
 		break;

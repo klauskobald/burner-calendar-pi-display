@@ -13,8 +13,9 @@ import Clock from "./clock";
 
 export default class Main extends ComponentBase {
 
-    constructor() {
+    constructor(startTime) {
         super();
+        this.startTime=startTime;
         this.containers = [];
     }
 
@@ -23,7 +24,7 @@ export default class Main extends ComponentBase {
         this.containers.push( new Container(
             'big',
             da.FirstByClass('container-big'),
-            new CalendarAgenda()
+            new CalendarAgenda(this.startTime)
         ));
 
         this.clock=new Clock();

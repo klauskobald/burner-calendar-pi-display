@@ -9,14 +9,21 @@ import './app/style.css';
 import Config from "./config";
 import Main from "./app/component/main";
 
-window._config=Config;
+var req = document.location.href.split('?');
+var dStr = req[1];
+var startTime = dStr ? new Date(dStr) : new Date();
+
+if (req[2])
+    Config.DaysColumns = parseInt(req[2]);
+
+window._config = Config;
 ApiRequest.Initialize(Config.ProxyPath);
-const main=new Main();
-window._main=main;
+const main = new Main(startTime);
+window._main = main;
 
 main.RenderInto(document.body);
 
 // cleanup
-setTimeout(()=>{
+setTimeout(() => {
     document.location.reload();
-},3600000 * 8);
+}, 3600000 * 2);

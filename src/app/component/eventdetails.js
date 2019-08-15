@@ -19,7 +19,19 @@ export default class EventDetails extends ComponentBase {
         console.log(e);
         var starttime = e['start']['dateTime'];
         var endtime= e['end']['dateTime'];
-        this.summary=e.summary;
+
+        var s = e['summary'].split(':');
+        var summary;
+        if (s.length === 1) {
+            summary = s[0];
+            this.iconname = null;
+        }
+        else {
+            var iconpath = Config.IconPath;
+            this.iconname = iconpath + s[0].trim().toLowerCase() + '.svg';
+            summary = s[1];
+        }
+        this.summary=summary;
         this.description=e.description;
         this.cId = e.organizer.email;
         this.location= Config.Calendars[this.cId].location;
@@ -27,6 +39,7 @@ export default class EventDetails extends ComponentBase {
         this.time=dow+" "+Tools.DateTimeFormatForToday(
             starttime) + " - "+Tools.DateTimeFormatForToday(
             endtime);
+
     }
 
     TemplateHasBeenLoaded(tpl) {
@@ -39,6 +52,9 @@ export default class EventDetails extends ComponentBase {
         };
         var da = new domAccess(tpl.dom);
         da.FirstByClass('head').style.backgroundColor = Config.Calendars[this.cId].color;
+        var iconele = da.FirstByClass('icon');
+        iconele.src = this.iconname;
+        iconele.style.visibility = this.iconname ? 'visible' : 'hidden';
     }
 
     HasBeenActivated() {
