@@ -28,7 +28,7 @@ export default class DataCalendar {
         for (var k in Config.Calendars) {
             console.log("load", k,this.starttime);
             var timestamp = this.starttime ? '/' + parseInt(this.starttime.getTime() / 1000) : '';
-            ApiRequest.Get('events/' + k + '/' + maxEvents + '/' + timestamp + '?' + new Date().getTime()).then(
+            ApiRequest.Get('events/' + k + '/' + maxEvents + '/' + timestamp).then(
                 (events) => {
                     try {
                         this.OnData(JSON.parse(events));

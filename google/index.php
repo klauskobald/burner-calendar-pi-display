@@ -10,12 +10,9 @@ const CacheTimeout = 10;
 $scr = str_replace(dirname($_SERVER['SCRIPT_NAME']) . '/', '', $_SERVER['REQUEST_URI']);
 $path = explode('/', $scr);
 
-$k = '';
-foreach ($path as $p)
-	if (!strpos($p, '?') !== false)
-		$k .= $p;
 
-$cfile = '/tmp/bc' . md5($k) . '.cache';
+
+$cfile = '/tmp/bc' . md5($scr) . '.cache';
 
 if (!file_exists($cfile) || filectime($cfile) < time() - CacheTimeout) {
 	# does only work over cli...
@@ -25,6 +22,11 @@ if (!file_exists($cfile) || filectime($cfile) < time() - CacheTimeout) {
 } else
 	$data = file_get_contents($cfile);
 
+
+$t=time()-60;
+foreach(glob('/tmp/bc*.cache') as $f)
+	if(@filectime($f)<$t)
+		@unlink($f);
 
 switch(array_pop($path)){
 	case 'csv':
