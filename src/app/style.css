@@ -144,13 +144,13 @@ table {
         opacity: 0;
     }
     100% {
-        opacity: 0.95;
+        opacity: 1;
     }
 }
 
 @keyframes fadeout {
     0% {
-        opacity: 0.95;
+        opacity: 1;
     }
     100% {
         opacity: 0.0;
@@ -174,7 +174,7 @@ table {
     0 0 3px 3px #aaa7ad,
     0 0 10px 10px rgba(171, 174, 176, 0.6);
 
-    opacity: 0.95;
+    opacity: 1;
     padding: 10px;
     margin: 0;
     animation: fadein 0.3s;
@@ -189,7 +189,7 @@ table {
 }
 
 .event-details h1 {
-    font-size: 5vw;
+    font-size: 3em;
 }
 
 .event-details .head {
@@ -198,12 +198,12 @@ table {
 
 .event-details .starttime {
     padding-top: 5px;
-    font-size: 2.5vw;
+    font-size: 1.5em;
 }
 
 .event-details .location {
     padding-top: 5px;
-    font-size: 2.5vw;
+    font-size: 1.5em;
 }
 
 .event-details .content {

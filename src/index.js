@@ -26,4 +26,4 @@ main.RenderInto(document.body);
 // cleanup
 setTimeout(() => {
     document.location.reload();
-}, 3600000 * 2);
+}, 3600000 * 1);

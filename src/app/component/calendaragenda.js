@@ -52,6 +52,7 @@ export default class CalendarAgenda extends ComponentBase {
         var currDay = null;
         var iconpath = Config.IconPath;
         var now=new Date();
+        var preroll=Config.AlertPreRollMinutes*60000;
         events.forEach(e => {
             var i = this.itemEle.cloneNode(true);
             i.onclick = () => {
@@ -63,7 +64,7 @@ export default class CalendarAgenda extends ComponentBase {
             var starttime = e['start']['dateTime'];
             var endtime = e['end']['dateTime'];
 
-            if(new Date(starttime)<=now && now<=new Date(endtime))
+            if(new Date(starttime)-preroll<=now && now<=new Date(endtime))
                 i.classList.add('happening-now');
 
             var dow = Tools.DateTimeRelativeDaysString(starttime);
