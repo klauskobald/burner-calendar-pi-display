@@ -24,12 +24,20 @@ export default class Tools{
     }
 
     static DateTimeRelativeDaysString(dtStr){
-        var dif=this.DateTimeRelativeDays(dtStr);
-        switch(dif){
-            case 0: return "Today";
-            case 1: return "Tomorrow";
-            default: return this.DayToString(dtStr);
+        var d=new Date(dtStr);
+        var now=new Date();
+        if((d-now)/86400000<7) {
+            var dif = this.DateTimeRelativeDays(dtStr);
+            switch (dif) {
+                case 0:
+                    return "Today";
+                case 1:
+                    return "Tomorrow";
+                default:
+                    return this.DayToString(dtStr);
+            }
         }
+        else return d.toISOString().substr(0,10);
     }
 
     static DayToString(dtStr){

@@ -54,20 +54,26 @@ export class ThemeTemplateReplacer {
             return;
         }
         // supports element
-        if (this.obj.innerText !== undefined)
+        if (this.obj.innerHTML !== undefined) {
+            this.obj.innerHTML = value;
+            return;
+        }
+
+        if (this.obj.innerText !== undefined) {
             this.obj.innerText = value;
+            return;
+        }
         // or attr
-        else
-            this.obj.nodeValue = value;
+        this.obj.nodeValue = value;
     }
 
-    bind(str,fn) {
-        if(!fn) throw "callback missing";
-        var me=this;
+    bind(str, fn) {
+        if (!fn) throw "callback missing";
+        var me = this;
         var e = this.obj;
         if (e.ownerElement) e = e.ownerElement;
         e[str] = (e) => {
-            fn(e,me.obj);
+            fn(e, me.obj);
         };
         return this;
     }
