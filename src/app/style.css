@@ -104,6 +104,14 @@ table {
     padding-left: 14px;
 }
 
+.agenda .day .events .item .by {
+    font-size: 0.8em;
+    padding: 4px;
+    padding-left: 14px;
+    font-style: italic;
+    opacity: 0.7;
+}
+
 .agenda .day .events .item .location {
     font-size: 0.9em;
     opacity: 0.4;

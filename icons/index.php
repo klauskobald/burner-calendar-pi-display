@@ -27,6 +27,12 @@
         .inset{
             padding-left: 20px;
         }
+
+        .small{
+            margin-left: 20px;
+            font-size: 0.5em;
+            color: #888888;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +62,10 @@
 
 
 	echo "
+	<tr>
+	<td></td>
+	<td>private  <span class='small'>event will be hidden in public calendar</span></td>
+	</tr>
 	<tr>
 	<td></td>
 	<td class='help'>Use the icon name in the event title like so: 

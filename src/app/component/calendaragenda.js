@@ -12,9 +12,9 @@ import EventDetails from "./eventdetails";
 
 export default class CalendarAgenda extends ComponentBase {
 
-    constructor(startTime){
+    constructor(startTime) {
         super();
-        this.startTime=startTime;
+        this.startTime = startTime;
     }
 
     TemplateHasBeenLoaded(tpl) {
@@ -40,8 +40,6 @@ export default class CalendarAgenda extends ComponentBase {
         this.datasource.LoadCalendars();
     }
 
-
-
     OnData(events) {
         console.log(events);
         var maxDays = Config.DaysColumns, dayIdx = 0;
@@ -51,9 +49,14 @@ export default class CalendarAgenda extends ComponentBase {
         var dayOfWeek = null;
         var currDay = null;
         var iconpath = Config.IconPath;
-        var now=new Date();
-        var preroll=Config.AlertPreRollMinutes*60000;
+        var now = new Date();
+        var preroll = Config.AlertPreRollMinutes * 60000;
         events.forEach(e => {
+            var s = e['summary'].split(':');
+            switch (s[0].trim()) {
+                case 'private': // do not display
+                    return;
+            }
             var i = this.itemEle.cloneNode(true);
             i.onclick = () => {
                 this.onEventClick(e);
@@ -64,7 +67,7 @@ export default class CalendarAgenda extends ComponentBase {
             var starttime = e['start']['dateTime'];
             var endtime = e['end']['dateTime'];
 
-            if(new Date(starttime)-preroll<=now && now<=new Date(endtime))
+            if (new Date(starttime) - preroll <= now && now <= new Date(endtime))
                 i.classList.add('happening-now');
 
             var dow = Tools.DateTimeRelativeDaysString(starttime);
@@ -82,7 +85,6 @@ export default class CalendarAgenda extends ComponentBase {
             }
 
             var da = new DomAccess(i);
-            var s = e['summary'].split(':');
             var summary, iconname;
             if (s.length === 1) {
                 summary = s[0];
@@ -92,6 +94,15 @@ export default class CalendarAgenda extends ComponentBase {
                 iconname = iconpath + s[0].trim().toLowerCase() + '.svg';
                 summary = s[1];
             }
+
+            if (e.description) {
+                var ed=e.description.trim();
+                if (ed.substr(0, 3).toLowerCase() === 'by:') {
+                    var dList = ed.split("\n");
+                    da.FirstByClass('by').innerHTML = "<span>" + dList[0] + "</span>";
+                }
+            }
+
             da.FirstByClass('summary').innerHTML = "<span>" + summary + "</span>";
             da.FirstByClass('location').innerHTML = "<span>" + Config.Calendars[cId].location + "</span>";
             da.FirstByClass('starttime').innerHTML = "<span>" + Tools.DateTimeFormatForToday(
