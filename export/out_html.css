@@ -1,0 +1,83 @@
+body {
+    font-family: Arial;
+    font-size: 1.8em;
+}
+
+p{
+    padding: 0;
+    margin: 0;
+}
+br{
+
+}
+
+.imprint{
+    border-top: solid #dddddd 1px;
+    font-size: 0.7em;
+    padding: 2em;
+    font-style: italic;
+    color: #555555;
+}
+
+.row{
+    padding: 1.2em;
+}
+
+.by {
+    padding-top: 0.2em;
+    font-style: italic;
+}
+
+.summary{
+    font-size: 1.5em;
+    color: white;
+    background-color: #333333;
+    padding: 0.2em;
+    padding-left: 2em;
+}
+
+.icon {
+    padding-left: 0.5em;
+    padding-top: 0.2em;
+    float: left;
+    width: 1.7em;
+    height: 1.2em;
+    background-color: #333333;
+}
+
+.icon img{
+    height: 1.9em;
+    filter: invert(100%);
+}
+
+.location{
+    color: #555555;
+    padding-top: 0.2em;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.times{
+    padding-top: 0.2em;
+}
+
+.creator{
+    padding-top: 0.2em;
+    color: #888888;
+    display: none;
+}
+
+.description{
+    padding-top: 0.2em;
+}
+
+h1{
+    padding: 0.6em;
+}
+
+@media only screen and (max-width: 890px) {
+    body {
+        font-size: 2.5em;
+    }
+
+}

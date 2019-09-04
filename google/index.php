@@ -44,6 +44,12 @@ switch(array_pop($path)){
 			echo join(",",$l)."\n";
 		}
 		break;
+	case 'html':
+		$a=json_decode($data,JSON_OBJECT_AS_ARRAY);
+		require '../export/out_html.php';
+		$o=new out_html($a);
+		$o->render();
+		break;
 	default:
 		header('Content-Type', 'application/json');
 		echo $data;

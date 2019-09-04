@@ -2,6 +2,7 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !^/data/$
+RewriteCond %{REQUEST_FILENAME} !\.(css|js|png|jpg)$
 RewriteRule . index.php [L]
 
 Header set Access-Control-Allow-Origin "*"

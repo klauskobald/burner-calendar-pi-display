@@ -11,11 +11,10 @@ $cmd = $argv[1];
 $calendarId = $argv[2];
 $max = $argv[3];
 
-if($argv[4]){
+if ($argv[4]) {
 	$startTime = strtotime($argv[4]);
-	if(!$startTime) $startTime=$argv[4]; # is timestamp
-}
-else $startTime =  time();
+	if (!$startTime) $startTime = $argv[4]; # is timestamp
+} else $startTime = time();
 
 $client = getClient();
 $service = new Google_Service_Calendar($client);
@@ -25,12 +24,33 @@ $optParams = array(
 	'singleEvents' => true,
 	'timeMin'      => date('c', $startTime),
 );
-$results = $service->events->listEvents($calendarId, $optParams);
-$events = $results->getItems();
+
+$events = array();
+$cfg=json_decode(file_get_contents(__DIR__.'/config.json'),JSON_OBJECT_AS_ARRAY);
+
+$calendarToLoc=array();
+foreach($cfg['calendars'] as $location=>$cid){
+	$calendarToLoc[$cid]=$location;
+}
+
+if ($calendarId == 'all') {
+	$cIdList=array();
+	foreach($cfg['calendars'] as $loc=>$id){
+		$cIdList[]=$id;
+	}
+} else
+	$cIdList = array($calendarId);
+
+foreach ($cIdList as $calendarId) {
+	$results = $service->events->listEvents($calendarId, $optParams);
+	$_events = $results->getItems();
+	$events = array_merge($events, $_events);
+}
 
 
 function exportGrouped($events) {
 	$lst = array();
+	global $calendarToLoc;
 	foreach ($events as $event) {
 		$k = $event->getSummary();
 		if (array_key_exists($k, $lst))
@@ -41,7 +61,7 @@ function exportGrouped($events) {
 				'description' => $event->getDescription(),
 				'times'       => array(),
 				'creator'     => $event->creator->email,
-				'location'    => $event->organizer->displayName
+				'location'    => $calendarToLoc[$event->organizer->email]
 			);
 		}
 		$d['times'][] = array('start' => $event->start->dateTime, 'end' => $event->end->dateTime);
