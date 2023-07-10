@@ -1,14 +1,34 @@
 {
   "calendars": {
-    "Overfloor": "e8c6549fed418c8031dbf53a517fb3fee569c4cf586a66255af2400ce594de13@group.calendar.google.com",
-    "Ballroom": "dl7kjncoiqe0ujcpcfq6ifh4ag@group.calendar.google.com",
-    "Outdoors": "31v09rqpcl3da9d9rsnvjmntjo@group.calendar.google.com",
-    "Chapel": "0r68vhdr6osop9ug0bka1civt8@group.calendar.google.com",
-    "Dungeon": "54l2b2mbkmjeivu92k3eo6jok0@group.calendar.google.com",
-    "Bean": "3at7rrajhvrk0h19vh7povo09g@group.calendar.google.com",
-    "Herrenzimmer": "o8j4ua2ifmte2it81lmnkvs04o@group.calendar.google.com",
-    "Living Room 1": "ggf0bda8dli8mpmi5tms3sf0ko@group.calendar.google.com",
-    "Adult Playground": "arhd3am2a34cds4kbe226f7dns@group.calendar.google.com",
-    "TBA": "ca1puvndkq785a601u0vo5rvl0@group.calendar.google.com"
+    "Overfloor": {
+     "id": "e8c6549fed418c8031dbf53a517fb3fee569c4cf586a66255af2400ce594de13@group.calendar.google.com",
+     "color": "rgba(222,0,139,0.8)"
+    },
+    "Sex+ Space": {
+     "id": "6914faf750c4f391cf3cba7114d137e2b4aedd6632a656a28426899cda1ea015@group.calendar.google.com",
+     "color": "rgba(180,0,0,0.8)"
+    },
+    "Workshops Room": {
+     "id": "f9778f7ea6b51cc6182731addbabffb869fd968e561951a551c858f30ad814bf@group.calendar.google.com",
+     "color": "rgba(180,120,0,0.8)"
+    },
+    "Spaceship": {
+     "id": "799b71086f7113d8fcbe396bb1ae4ae994d7ceed27bdf4c62e9b4d0345b3d8a4@group.calendar.google.com",
+     "color": "rgba(0,120,222,0.8)"
+    },
+    "Tavern": {
+     "id": "5ec3bd20f89d1ce458b792ea7e7d39ef225cbd778f03795b032789a6a84e4107@group.calendar.google.com",
+     "color": "rgba(222,222,11,0.8)"
+    },
+    "Bean": {
+     "id": "d00398ed3112eb91d86bed2d1d52669a89405d48ccfeefe57bf8d07fd9c707ed@group.calendar.google.com",
+     "color": "rgba(0,222,120,0.8)"
+    },
+    "Outdoors": {
+     "id": "90f5219efc258f7a1ed2fb6daf459dab93be03be1cffb76014862e18ca0c8a02@group.calendar.google.com",
+     "color": "rgba(0,244,0,0.8)"
+    }
+
+
   }
 }
