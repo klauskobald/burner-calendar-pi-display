@@ -23,7 +23,12 @@ class out_html {
 
 		usort(
 			$this->data, function ($a, $b) {
-			return $a[2] < $b[2] ? -1 : 1;
+			$aa = explode(':', $a[0]);
+			$bb = explode(':', $b[0]);
+			if(!$aa[1]) $aa[1]=$aa[0];
+			if(!$bb[1]) $bb[1]=$bb[0];
+			return strtoupper(trim($aa[1]))<strtoupper(trim($bb[1])) ? -1:1	;
+			#return $a[2] < $b[2] ? -1 : 1;
 		}
 		);
 

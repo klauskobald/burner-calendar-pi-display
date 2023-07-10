@@ -21,6 +21,8 @@ br{
 
 .row{
     padding: 1.2em;
+    page-break-inside: avoid;
+
 }
 
 .by {
@@ -34,6 +36,7 @@ br{
     background-color: #333333;
     padding: 0.2em;
     padding-left: 2em;
+    -webkit-print-color-adjust: exact;
 }
 
 .icon {
@@ -43,6 +46,7 @@ br{
     width: 1.7em;
     height: 1.2em;
     background-color: #333333;
+    -webkit-print-color-adjust: exact;
 }
 
 .icon img{
@@ -77,7 +81,14 @@ h1{
 
 @media only screen and (max-width: 890px) {
     body {
-        font-size: 2.5em;
+        font-size: 1.5em;
     }
 
 }
+
+@media print {
+    body {
+        font-size: 1em;
+    }
+}
+

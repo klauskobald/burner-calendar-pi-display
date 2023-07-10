@@ -23,10 +23,10 @@ export default class DataCalendar {
     }
 
     LoadCalendars() {
-        var maxEvents = Config.MaxEvents;
+        var maxEvents = Config.DaysColumns == 1 ? Config.MaxEvents : 1000;
         StatusInfo.Display("loading ...");
         for (var k in Config.Calendars) {
-            console.log("load", k,this.starttime);
+            console.log("load", k, this.starttime);
             var timestamp = this.starttime ? '/' + parseInt(this.starttime.getTime() / 1000) : '';
             ApiRequest.Get('events/' + k + '/' + maxEvents + '/' + timestamp).then(
                 (events) => {

@@ -37,12 +37,12 @@ export default class Tools{
                     return this.DayToString(dtStr);
             }
         }
-        else return d.toISOString().substr(0,10);
+        else return d.toString().substr(0,10);
     }
 
     static DayToString(dtStr){
         var d=new Date(dtStr);
-        return Tools.days[d.getDay()];
+        return Tools.days[d.getUTCDay()];
     }
 }
 Tools.days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];

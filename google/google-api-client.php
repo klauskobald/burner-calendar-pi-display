@@ -12,7 +12,7 @@ if (php_sapi_name() != 'cli') {
 function getClient()
 {
 	$client = new Google_Client();
-	$client->setApplicationName('Google Calendar API PHP Quickstart');
+	$client->setApplicationName('Burner Calendar API PHP');
 	$client->setScopes(Google_Service_Calendar::CALENDAR_READONLY);
 	$client->setAuthConfig('server/data/credentials.json');
 	$client->setAccessType('offline');

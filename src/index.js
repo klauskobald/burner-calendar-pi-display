@@ -15,6 +15,8 @@ var startTime = dStr ? new Date(dStr) : new Date();
 
 if (req[2])
     Config.DaysColumns = parseInt(req[2]);
+if (req[3])
+    Config.Rotate.Target = req[3];
 
 window._config = Config;
 ApiRequest.Initialize(Config.ProxyPath);
@@ -26,4 +28,4 @@ main.RenderInto(document.body);
 // cleanup
 setTimeout(() => {
     document.location.reload();
-}, 3600000 * 1);
+}, 900000);

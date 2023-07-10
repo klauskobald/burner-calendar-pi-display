@@ -5,7 +5,7 @@ body {
     /*font-family: 'Monda', sans-serif;*/
     font-family: 'Noto Sans TC', sans-serif;
     line-height: 1.5;
-    font-size: 16px;
+    font-size: 14px;
     margin: 0;
     padding: 0;
 }
@@ -41,19 +41,19 @@ table {
 }
 
 .calendar.agenda .bullet {
-    width: 50px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.3);
+    width: 30px;
+    padding: 6px;
+    /*background-color: rgba(0, 0, 0, 0.3);*/
 }
 
 .calendar.agenda .icon {
     filter: invert(100%);
-    width: 50px;
+    width: 30px;
 }
 
 .event-details .bullet {
     width: 90px;
-    padding: 10px;
+    padding: 6px;
 }
 
 .event-details .icon {
@@ -82,14 +82,14 @@ table {
 
 .agenda .day .events .item .starttime {
     font-size: 1.2em;
-    padding: 4px;
+    /*padding: 4px;*/
     padding-left: 10px;
 }
 
 .agenda .day .events .item .starttime > span {
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.3);
-    padding: 3px;
+    /*padding: 3px;*/
     padding-left: 10px;
     padding-right: 10px;
     max-width: 140px;
@@ -99,14 +99,23 @@ table {
 }
 
 .agenda .day .events .item .summary {
-    font-size: 1.2em;
-    padding: 4px;
+    font-size: 1.5em;
+    /*padding: 4px;*/
     padding-left: 14px;
+    line-height: 1.1em;
+}
+
+.shrink-text{
+    font-size: 1.25em !important;
+}
+.grow-text{
+    font-size: 1.75em !important;
 }
 
 .agenda .day .events .item .by {
     font-size: 0.8em;
     padding: 4px;
+    padding-top: 2px;
     padding-left: 14px;
     font-style: italic;
     opacity: 0.7;
@@ -117,7 +126,7 @@ table {
     opacity: 0.4;
     position: absolute;
     right: 15px;
-    top: 15px;
+    top: 9px;
     padding: 0px;
 
 }
@@ -125,19 +134,31 @@ table {
 @keyframes glow {
     0% {
         box-shadow:
-        0 0 5px 5px rgba(255, 255, 255, 0.2),
-        0 0 12px 12px rgba(255, 255, 255, 0.1);
+            /*0 0 5px 5px rgba(255, 255, 255, 0.2),*/
+                0 0 12px 12px rgba(255, 255, 255, 0.1);
+    }
+    49% {
+        box-shadow:
+            /*0 0 5px 5px rgba(255, 255, 255, 0.2),*/
+                0 0 12px 12px rgba(255, 255, 255, 0.1);
     }
     50% {
         box-shadow:
-        0 0 5px 5px rgba(255, 255, 255, 0.89),
-        0 0 12px 12px rgba(255, 255, 255, 0.45);
+            /*0 0 5px 5px rgba(255, 255, 255, 0.89),*/
+                0 0 12px 12px rgba(255, 255, 255, 0.45);
+
+
+    }
+    99% {
+        box-shadow:
+            /*0 0 5px 5px rgba(255, 255, 255, 0.89),*/
+                0 0 12px 12px rgba(255, 255, 255, 0.45);
 
 
     }
     100% {
         box-shadow:
-        0 0 5px 5px rgba(255, 255, 255, 0.2),
+        /*0 0 5px 5px rgba(255, 255, 255, 0.2),*/
         0 0 12px 12px rgba(255, 255, 255, 0.1);
     }
 }
@@ -147,7 +168,7 @@ table {
     animation: glow 4s infinite;
 }
 
-@keyframes fadein {
+@keyframes fadeinAUS {
     0% {
         opacity: 0;
     }
@@ -156,7 +177,7 @@ table {
     }
 }
 
-@keyframes fadeout {
+@keyframes fadeoutAUS {
     0% {
         opacity: 1;
     }
@@ -239,6 +260,12 @@ table {
     opacity: 0.8;
 }
 
+.oneday{
+    width:24%;
+    float: left;
+    min-height: 100px;
+}
+
 .col-1 {
     width: 100%;
 }
@@ -263,9 +290,10 @@ table {
     width: 16.6%;
 }
 
-@media only screen and (max-width: 840px) {
+
+@media only screen and (max-width: 1240px) {
     body {
-        font-size: 13px;
+        font-size: 12px;
     }
     .calendar.agenda .bullet {
         width: 30px;
@@ -284,7 +312,7 @@ table {
 
 @media only screen and (max-width: 690px) {
     body {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     [class*="col-"] {

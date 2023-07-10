@@ -1,20 +1,42 @@
 <?php
+
+
 /**
  * User: klausk
  * Date: 2019-08-14
  * Time: 15:43
  */
+ 
+ /*
+ Example:
+ php proxy.php events all 1000 20190913
+ php proxy.php events o8j4ua2ifmte2it81lmnkvs04o@group.calendar.google.com 1000 20190913
+ php proxy.php export-grouped-by-time-table all 1000 20190918 3
+	# 3 = limit to 3 days
+ */
+
+define("DEBUG",0);
+ 
 chdir(__DIR__ . '/..');
 require __DIR__ . '/google-api-client.php';
+
+if(count($argv)<2) die("
+USAGE: CMD CalendarId maxItems [start date]
+");
 
 $cmd = $argv[1];
 $calendarId = $argv[2];
 $max = $argv[3];
-
+$maxSeconds=0;
 if ($argv[4]) {
 	$startTime = strtotime($argv[4]);
-	if (!$startTime) $startTime = $argv[4]; # is timestamp
+	if (!$startTime) $startTime = $argv[4]; # is timestamp	
 } else $startTime = time();
+if($argv[5]){
+	$maxSeconds=86400*floatval($argv[5]);
+	if($maxSeconds<1000) $maxSeconds=0;
+}
+
 
 $client = getClient();
 $service = new Google_Service_Calendar($client);
@@ -24,7 +46,12 @@ $optParams = array(
 	'singleEvents' => true,
 	'timeMin'      => date('c', $startTime),
 );
+if($maxSeconds){
+	$optParams['timeMax']		=date('c', $startTime+$maxSeconds);
 
+}
+
+if(DEBUG) print_r($optParams);
 $events = array();
 $cfg=json_decode(file_get_contents(__DIR__.'/config.json'),JSON_OBJECT_AS_ARRAY);
 
@@ -42,8 +69,11 @@ if ($calendarId == 'all') {
 	$cIdList = array($calendarId);
 
 foreach ($cIdList as $calendarId) {
-	$results = $service->events->listEvents($calendarId, $optParams);
-	$_events = $results->getItems();
+	try{
+		$results = $service->events->listEvents($calendarId, $optParams);
+		$_events = $results->getItems();
+	}catch(Exception $e){
+	}
 	$events = array_merge($events, $_events);
 }
 
