@@ -5,7 +5,9 @@
  * Time: 22:58
  */
 
-define('IMPRINT_TEXT', 'Technical support: @nagu.whiteout in https://hub.burners.at');
+define('IMPRINT_TEXT', 'Support: <a href=https://hub.burners.at/t/help-for-using-the-event-system-google-calendar/251>https: //hub.burners.at/t/help-for-using-the-event-system-google-calendar/251
+</a>
+');
 
 class out_html
 {

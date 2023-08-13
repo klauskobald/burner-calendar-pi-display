@@ -2,7 +2,7 @@
   "calendars": {
     "Overfloor": {
      "id": "e8c6549fed418c8031dbf53a517fb3fee569c4cf586a66255af2400ce594de13@group.calendar.google.com",
-     "color": "rgba(222,0,139,0.8)"
+     "color": "rgba(200,0,120,0.8)"
     },
     "Sex+ Space": {
      "id": "6914faf750c4f391cf3cba7114d137e2b4aedd6632a656a28426899cda1ea015@group.calendar.google.com",
@@ -26,9 +26,12 @@
     },
     "Outdoors": {
      "id": "90f5219efc258f7a1ed2fb6daf459dab93be03be1cffb76014862e18ca0c8a02@group.calendar.google.com",
-     "color": "rgba(0,244,0,0.8)"
+     "color": "rgba(0,122,0,0.8)"
+    },
+    "Salon": {
+     "id": "47c8aa0df19933fae278f32fac7936160a076bf45d1b22e831bc3fc45d441b4d@group.calendar.google.com",
+     "color": "rgba(155,155,199,0.8)"
     }
-
 
   }
 }

@@ -5,7 +5,8 @@ It is meant to run on a raspberry pi zero.
 Run node install to get all dependencies.
 Run node run build to create the dist folder.
 
-Rename src/config-DEMO.js to config.js and put your calendar IDs there.
+Rename src/config-DEMO.js to config.js and change host paths if needed.
+The configs for the calendars go into google/config.json
 
 Make sure to run node server/get-authorization.js once to get a token. This data will then be stored into the data folder and will be used for all following requests.
 

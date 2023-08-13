@@ -1,4 +1,7 @@
 <?php
+
+#die("DEAD TEST");
+
 /**
  * User: klausk
  * Date: 2019-08-14
@@ -25,7 +28,7 @@ change html to csv for download
  */
 
 define("DEBUG", 0);
-const CacheTimeout = 10;
+const CacheTimeout = 30;
 
 $scr = str_replace(dirname($_SERVER['SCRIPT_NAME']) . '/', '', $_SERVER['REQUEST_URI']);
 $path = explode('/', $scr);
