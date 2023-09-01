@@ -28,9 +28,13 @@ export default class EventDetails extends ComponentBase {
       summary = s[1]
     }
     this.summary = summary
-    if (!e.description)
+    if (!e.description || e._problem)
       this.description =
-        '<i>Hey event owner!<br><br>A Description is missing!<br>Go to the calendar and fill out the description field!<br>You may set the first line to <br>by: Your Name<br>This will help your fellow burners to know who is running this event!<br>However do not add it, if you are a DJ, because your name is most likely in the title allready.</i>'
+        '<i>Hey event owner!<br><br><b>' +
+        e._problem +
+        '</b><br><br>Go to the calendar and fill out the description field!<br>You may set the first line to <br>by: Your Name<br>This will help your fellow burners to know who is running this event!<br>However do not add it, if you are a DJ, because your name is most likely in the title allready.</i>' +
+        '<br><br>' +
+        (e.description ? '<hr>' + e.description : '')
     else this.description = e.description.replace(/\n/g, '<br/>')
 
     this.cId = e.organizer.email

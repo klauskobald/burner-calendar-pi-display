@@ -78,7 +78,8 @@ export default class CalendarAgenda extends ComponentBase {
     // var width = parseInt(100 / maxDays) + "%";
     var colClass = 'col-' + maxDays
     var itemClass = maxDays === 1 ? 'oneday' : ''
-    var newContainer = document.createElement('div')
+    // var newContainer = document.createElement('div')
+    var newContainer = this.container
     newContainer.innerHTML = ''
     var dayOfWeek = null
     var currDay = null
@@ -87,6 +88,8 @@ export default class CalendarAgenda extends ComponentBase {
     var preroll = Config.AlertPreRollMinutes * 60000
     var totct = 0
     var totmax = maxDays == 1 ? Config.MaxEventsTotal : 999
+    var problemList = []
+
     events.forEach(e => {
       if (totct++ > totmax) return
       var s = e['summary'].split(':')
@@ -98,6 +101,10 @@ export default class CalendarAgenda extends ComponentBase {
       i.onclick = () => {
         this.onEventClick(e)
       }
+      // i.addEventListener('pointerdown', e => {
+      //   this.onEventClick(e)
+      // })
+
       var cId = e.organizer.email
       i.style.backgroundColor = Config.Calendars[cId].color
       i.classList.add(Config.Calendars[cId].class)
@@ -107,10 +114,10 @@ export default class CalendarAgenda extends ComponentBase {
           i.style.display = 'none'
           break
       }
-      var starttime = e['start']['dateTime']
-      var endtime = e['end']['dateTime']
+      var starttime = new Date(e['start']['dateTime'])
+      var endtime = new Date(e['end']['dateTime'])
 
-      if (new Date(starttime) - preroll <= now && now <= new Date(endtime))
+      if (starttime - preroll <= now && now <= endtime)
         i.classList.add('happening-now')
 
       var dow = Tools.DateTimeRelativeDaysString(starttime)
@@ -136,12 +143,34 @@ export default class CalendarAgenda extends ComponentBase {
         summary = s[1]
       }
 
+      var problem = null
+
       if (e.description) {
         var ed = e.description.trim()
+        ed = ed.replace('<br>', '\n')
+        ed = ed.replace('<BR>', '\n')
+        ed = ed.replace('<br\\>', '\n')
+
         if (ed.substr(0, 3).toLowerCase() === 'by:') {
           var dList = ed.split('\n')
           da.FirstByClass('by').innerHTML = '<span>' + dList[0] + '</span>'
+        } else {
+          if (ed.indexOf('by ') > 0)
+            problem =
+              'By is wrong!\nThe first line of description should read exactly "by: YOURNAME".<br> You seem to have added a "by" somewhere inside the description. This is wrong.'
         }
+      } else problem = 'Description Missing!'
+
+      if (problem) {
+        e['_problem'] = problem
+        // problemList.push({
+        //   summary: e.summary,
+        //   date: starttime,
+        //   email: e.creator.email,
+        //   problem: problem
+        // })
+        summary +=
+          '<div class="event-problem">' + problem.split('\n')[0] + '</div>'
       }
 
       var sumele = da.FirstByClass('summary')
@@ -150,6 +179,7 @@ export default class CalendarAgenda extends ComponentBase {
       else if (summary.length < 20) sumele.classList.add('grow-text')
       da.FirstByClass('location').innerHTML =
         '<span>' + Config.Calendars[cId].location + '</span>'
+
       da.FirstByClass('starttime').innerHTML =
         '<span>' +
         Tools.DateTimeFormatForToday(starttime) +
@@ -163,7 +193,12 @@ export default class CalendarAgenda extends ComponentBase {
     })
     // TODO - this causes black screen sometimes
     // better compare and remove/add single events
-    this.container.innerHTML = newContainer.innerHTML
+    // this.container.innerHTML = newContainer.innerHTML
+
+    if (problemList.length > 0) {
+      console.warn('problems with events:')
+      console.log(problemList)
+    }
   }
 
   onEventClick (e) {
